@@ -12,4 +12,3 @@ TODO
 - write docs
 - provide python package functionality
 - write README file
-- customize RibbonExecutionException

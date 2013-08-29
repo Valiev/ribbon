@@ -2,7 +2,17 @@ from subprocess import Popen, PIPE
 
 
 class RibbonExcecutionException(Exception):
-    """ FIXME """
+    def __init__(self, command_line, exit_code, message = None):
+        Exception.__init__(self)
+        self.command_line = command_line
+        self.exit_code = exit_code
+        self.message = message
+
+    def __str__(self):
+        msg = "'%(command_line)s' returned %(exit_code)d exit code" % self.__dict__
+        if self.message:
+            msg += " with message '%s'" % self.message
+        return msg
 
 
 class CmdBuilder(object):
@@ -86,7 +96,7 @@ class BaseRibbon(object):
         ret = self.system(*args, **kwargs)
         if ret:
             cmd = self.build_cmd_str(*args, **kwargs)
-            raise RibbonExcecutionException("%s returned %d" % (cmd, ret))
+            raise RibbonExcecutionException(cmd, ret)
 
     def getstatusoutput(self, *args, **kwargs):
         kwargs.update(dict(
@@ -102,7 +112,7 @@ class BaseRibbon(object):
         ret, out = self.getstatusoutput(*args, **kw)
         if ret:
             cmd = self.build_cmd_str(*args, **kw)
-            raise RibbonExcecutionException("%s returned %d" % (cmd, ret))
+            raise RibbonExcecutionException(cmd, ret)
         return out
 
 
