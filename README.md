@@ -8,7 +8,6 @@ TODO
 ----
 
 - add tests
-- add examples
 - write docs
 - provide python package functionality
 - write README file
