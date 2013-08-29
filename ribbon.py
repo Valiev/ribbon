@@ -76,7 +76,6 @@ class BaseRibbon(object):
         popen_options.update(new_popen_options)
         extra_cmd = self.builder.build_cmd_list(*args, **kwargs)
         cmd = self.base_cmd + extra_cmd
-        print cmd
         return Popen(cmd, **popen_options)
 
     def system(self, *args, **kwargs):
