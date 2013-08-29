@@ -1,7 +1,7 @@
 from subprocess import Popen, PIPE
 
 
-class RibbonExcecutionException(Exception):
+class RibbonExecutionException(Exception):
     def __init__(self, command_line, exit_code, message = None):
         Exception.__init__(self)
         self.command_line = command_line
@@ -96,7 +96,7 @@ class BaseRibbon(object):
         ret = self.system(*args, **kwargs)
         if ret:
             cmd = self.build_cmd_str(*args, **kwargs)
-            raise RibbonExcecutionException(cmd, ret)
+            raise RibbonExecutionException(cmd, ret)
 
     def getstatusoutput(self, *args, **kwargs):
         kwargs.update(dict(
@@ -112,7 +112,7 @@ class BaseRibbon(object):
         ret, out = self.getstatusoutput(*args, **kw)
         if ret:
             cmd = self.build_cmd_str(*args, **kw)
-            raise RibbonExcecutionException(cmd, ret)
+            raise RibbonExecutionException(cmd, ret)
         return out
 
 
